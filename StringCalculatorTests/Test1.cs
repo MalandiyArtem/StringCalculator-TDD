@@ -24,5 +24,20 @@ namespace StringCalculatorTests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Add_5_returned_5()
+        {
+            // Arrange
+            StringCalculator calc = new StringCalculator();
+            string input = "5";
+            int expected = 5;
+
+            // Act
+            int actual = calc.Add(input);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
