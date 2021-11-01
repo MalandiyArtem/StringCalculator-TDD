@@ -1,44 +1,31 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 
 namespace StringCalculatorLibrary
 {
     public class StringCalculator
     {
-        public int Add(string numbers)
+        public int Add(string inputExpression)
         {
-            if (numbers.Trim() == "")
+            int sum = 0;
+            string[] nums;
+
+            if (inputExpression.Trim() == "")
                 return 0;
 
+            RegularMatch optional = new RegularMatch(@"(\/{2}\S)\n", inputExpression);
 
-            //Regex optional = new Regex(@"^\/\/.");
-            Regex optional = new Regex(@"(\/{2}\S)\n");
-            Match matchOptional = optional.Match(numbers);
-            int sum = 0;
-
-            // Проверяем есть ли опциональная часть строки
-            if (matchOptional.Success)
+            if (optional.GetMatch().Success)
             {
-                // Нахоим кастомный разделитель
-                Regex findCustomDelimiter = new Regex(@"[^\/{2}]{1}");
-                Match customDelimiter = findCustomDelimiter.Match(numbers);
+                RegularMatch delimeter = new RegularMatch(@"[^\/{2}]{1}", inputExpression);
+                string expressionWithoutOptional = optional.Replace("");
 
-                // отрезаем опциональную часть
-                string newNums = optional.Replace(numbers, "");
-
-                string[] nums = newNums.Split(new char[] { ',', '\n', Convert.ToChar(customDelimiter.Value) });
-
-                for (int i = 0; i < nums.Length; i++)
-                    sum += int.Parse(nums[i]);
-
+                nums = expressionWithoutOptional.Split(new char[] { ',', '\n', Convert.ToChar(delimeter.GetMatch().Value) });
             }
             else
-            {
-                string[] nums = numbers.Split(new char[] { ',', '\n'});
+                 nums = inputExpression.Split(new char[] { ',', '\n'});
 
-                for (int i = 0; i < nums.Length; i++)
-                    sum += int.Parse(nums[i]);
-            }
+            for (int i = 0; i < nums.Length; i++)
+                sum += int.Parse(nums[i]);
 
             return sum;
         }
