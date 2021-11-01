@@ -8,6 +8,8 @@ namespace StringCalculatorLibrary
         {
             if (numbers.Trim() == "")
                 return 0;
+            if (numbers.Length == 1)
+                return int.Parse(numbers);
             return -1;
         }
     }

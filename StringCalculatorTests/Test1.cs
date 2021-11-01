@@ -39,5 +39,20 @@ namespace StringCalculatorTests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Add_7and3_returned_10()
+        {
+            // Arrange
+            StringCalculator calc = new StringCalculator();
+            string input = "7,3";
+            int expected = 10;
+
+            // Act
+            int actual = calc.Add(input);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
