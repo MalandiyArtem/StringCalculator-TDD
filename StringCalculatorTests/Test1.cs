@@ -15,5 +15,10 @@ namespace StringCalculatorTests
         {
             Assert.Pass();
         }
+
+        public void Test2()
+        {
+            Assert.Pass();
+        }
     }
 }
