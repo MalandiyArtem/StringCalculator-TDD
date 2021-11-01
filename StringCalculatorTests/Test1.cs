@@ -3,18 +3,20 @@ using StringCalculatorLibrary;
 
 namespace StringCalculatorTests
 {
-    public class Tests
+    public class Test1
     {
+        StringCalculator calc;
+
         [SetUp]
         public void Setup()
         {
+            calc = new StringCalculator();
         }
 
         [Test]
         public void Add_empty_returned_0()
         {
             // Arrange
-            StringCalculator calc = new StringCalculator();
             string input = "";
             int expected = 0;
 
@@ -29,7 +31,6 @@ namespace StringCalculatorTests
         public void Add_5_returned_5()
         {
             // Arrange
-            StringCalculator calc = new StringCalculator();
             string input = "5";
             int expected = 5;
 
@@ -44,7 +45,6 @@ namespace StringCalculatorTests
         public void Add_7and3_returned_10()
         {
             // Arrange
-            StringCalculator calc = new StringCalculator();
             string input = "7,3";
             int expected = 10;
 
