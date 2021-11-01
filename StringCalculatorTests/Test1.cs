@@ -11,9 +11,18 @@ namespace StringCalculatorTests
         }
 
         [Test]
-        public void Test1()
+        public void Add_empty_returned_0()
         {
-            Assert.Pass();
+            // Arrange
+            StringCalculator calc = new StringCalculator();
+            string input = "";
+            int expected = 0;
+
+            // Act
+            int actual = calc.Add(input);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
         }
     }
 }
