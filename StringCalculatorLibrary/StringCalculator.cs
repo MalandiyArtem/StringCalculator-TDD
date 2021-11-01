@@ -6,7 +6,7 @@ namespace StringCalculatorLibrary
     {
         public int Add(string numbers)
         {
-            string[] nums = numbers.Split(',');
+            string[] nums = numbers.Split(new char[]{ ',', '\n' });
             int sum = 0;
 
             if (numbers.Trim() == "")
