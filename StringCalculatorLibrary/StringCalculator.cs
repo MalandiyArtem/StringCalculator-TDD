@@ -7,15 +7,15 @@ namespace StringCalculatorLibrary
         public int Add(string numbers)
         {
             string[] nums = numbers.Split(',');
+            int sum = 0;
 
             if (numbers.Trim() == "")
                 return 0;
-            if (nums.Length == 1)
-                return int.Parse(nums[0]);
-            if (nums.Length == 2)
-                return int.Parse(nums[0]) + int.Parse(nums[1]);
 
-            return -1;
+            for (int i = 0; i < nums.Length; i++)
+                sum += int.Parse(nums[i]);
+
+            return sum;
         }
     }
 }
