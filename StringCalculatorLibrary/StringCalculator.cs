@@ -38,8 +38,10 @@ namespace StringCalculatorLibrary
             int sum = 0;
 
             foreach (var item in positiveNumbers)
-                sum += item;
-
+            {
+                if (item <= 1000)
+                    sum += item;
+            }
             return sum;
         }
 
