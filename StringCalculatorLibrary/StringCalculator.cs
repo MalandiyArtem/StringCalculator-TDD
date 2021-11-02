@@ -16,10 +16,10 @@ namespace StringCalculatorLibrary
 
             if (optional.GetMatch().Success)
             {
-                RegularMatch delimeter = new RegularMatch(@"(?<=\[)(.*)(?=\])|(?<=\/\/)(.){1}(?=\n)", inputExpression);
+                RegularMatch delimeter = new RegularMatch(@"(?<=\[)(.)(?=\])|(?<=\[)(.*)(?=\])|(?<=\/\/)(.){1}(?=\n)", inputExpression);
                 string expressionWithoutOptional = optional.Replace("");
 
-                nums = expressionWithoutOptional.Split(new string[] { ",", "\n", delimeter.GetMatch().Value }, StringSplitOptions.RemoveEmptyEntries);
+                nums = expressionWithoutOptional.Split(delimeter.GetDelimiters(), StringSplitOptions.RemoveEmptyEntries);
             }
             else
                 nums = inputExpression.Split(new char[] { ',', '\n' });
