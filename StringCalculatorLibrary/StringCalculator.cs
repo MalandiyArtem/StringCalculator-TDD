@@ -12,22 +12,17 @@ namespace StringCalculatorLibrary
             if (inputExpression.Trim() == "")
                 return 0;
 
-            RegularMatch optional = new RegularMatch(@"(\/{2}\S)\n", inputExpression);
+            RegularMatch optional = new RegularMatch(@"^\/\/(.*)(?=\n)", inputExpression);
 
             if (optional.GetMatch().Success)
             {
-                RegularMatch delimeter = new RegularMatch(@"[^\/{2}]{1}", inputExpression);
+                RegularMatch delimeter = new RegularMatch(@"(?<=\[)(.*)(?=\])|(?<=\/\/)(.){1}(?=\n)", inputExpression);
                 string expressionWithoutOptional = optional.Replace("");
 
-                nums = expressionWithoutOptional.Split(new char[] { ',', '\n', Convert.ToChar(delimeter.GetMatch().Value) });
+                nums = expressionWithoutOptional.Split(new string[] { ",", "\n", delimeter.GetMatch().Value }, StringSplitOptions.RemoveEmptyEntries);
             }
             else
-                nums = inputExpression.Split(new char[] { ',', '\n'});
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                Console.WriteLine(nums[i]);
-            }
+                nums = inputExpression.Split(new char[] { ',', '\n' });
 
             return GetSum(nums);
         }
