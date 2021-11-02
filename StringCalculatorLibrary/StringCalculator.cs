@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace StringCalculatorLibrary
 {
@@ -6,7 +7,6 @@ namespace StringCalculatorLibrary
     {
         public int Add(string inputExpression)
         {
-            int sum = 0;
             string[] nums;
 
             if (inputExpression.Trim() == "")
@@ -22,12 +22,52 @@ namespace StringCalculatorLibrary
                 nums = expressionWithoutOptional.Split(new char[] { ',', '\n', Convert.ToChar(delimeter.GetMatch().Value) });
             }
             else
-                 nums = inputExpression.Split(new char[] { ',', '\n'});
+                nums = inputExpression.Split(new char[] { ',', '\n'});
 
             for (int i = 0; i < nums.Length; i++)
-                sum += int.Parse(nums[i]);
+            {
+                Console.WriteLine(nums[i]);
+            }
+
+            return GetSum(nums);
+        }
+
+        private int GetSum(string[] nums)
+        {
+            List<int> positiveNumbers = CheckNumbers(nums);
+            int sum = 0;
+
+            foreach (var item in positiveNumbers)
+                sum += item;
 
             return sum;
+        }
+
+        private List<int> CheckNumbers(string[] nums)
+        {
+            List<int> negativeNumbersList = new List<int>();
+            List<int> positiveNumbersList = new List<int>();
+            string negativeNumbers = "";
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int num = int.Parse(nums[i]);
+
+                if (num < 0)
+                {
+                    negativeNumbers += $"{num} ";
+                    negativeNumbersList.Add(num);
+                }
+                else
+                    positiveNumbersList.Add(num);
+            }
+
+            if (negativeNumbersList.Count > 1)
+                throw new NegativesNotAllowedException(negativeNumbers.Trim());
+            if (negativeNumbersList.Count == 1)
+                throw new NegativesNotAllowedException();
+
+            return positiveNumbersList;
         }
     }
 }
