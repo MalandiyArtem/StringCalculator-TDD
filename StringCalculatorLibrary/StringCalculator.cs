@@ -16,7 +16,7 @@ namespace StringCalculatorLibrary
 
             if (optional.GetMatch().Success)
             {
-                RegularMatch delimeter = new RegularMatch(@"(?<=\[)(.)(?=\])|(?<=\[)(.*)(?=\])|(?<=\/\/)(.){1}(?=\n)", inputExpression);
+                RegularMatch delimeter = new RegularMatch(@"(?<=\[)(.+?)(?=\])|(?<=\[)(.*)(?=\])|(?<=\/\/)(.){1}(?=\n)", inputExpression);
                 string expressionWithoutOptional = optional.Replace("");
 
                 nums = expressionWithoutOptional.Split(delimeter.GetDelimiters(), StringSplitOptions.RemoveEmptyEntries);
